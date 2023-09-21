@@ -1,18 +1,17 @@
 class RockPaperScissors {
     static rockPaperScissors(playerOneMove, playerTwoMove) {
-      if (playerTwoMove === "paper") {
-        return "playerTwo";
-      }
-
-      if (playerOneMove === "rock") {
-        return "playerOne";
-      }
-
-      if (playerOneMove === "paper") {
+      if (this.#isPlayerOneTheWinner(playerOneMove, playerTwoMove)) {
         return "playerOne";
       }
 
       return "playerTwo";
+    }
+
+    static #isPlayerOneTheWinner(playerOneMove, playerTwoMove) {
+      return (
+        playerOneMove === "rock" && playerTwoMove === "scissors" ||
+        playerOneMove === "paper" && playerTwoMove === "rock"
+      )
     }
   }
 
