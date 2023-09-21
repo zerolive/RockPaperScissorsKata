@@ -1,8 +1,16 @@
-const { renameMe } = require('../src/kata');
+class RockPaperScissors {
+    static rockPaperScissors() {
+        return 'playerOne'
+    }
+}
 
-describe("Kata", function () {
-  it("change_this_name", function () {
-   var result = renameMe();
-      expect(result).toBe(true);
-  });
-});
+describe("Rock Paper Scissors", () => {
+    it("Given I have chosen rock When the opponent chooses scissors Then I should win", () => {
+        const playerOneMove = 'rock'
+        const playerTwoMove = 'scissors'
+
+        const winner = RockPaperScissors.rockPaperScissors(playerOneMove, playerTwoMove)
+
+        expect(winner).toBe('playerOne')
+    })
+})
