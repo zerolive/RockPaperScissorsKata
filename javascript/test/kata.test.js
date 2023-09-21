@@ -1,6 +1,10 @@
 class RockPaperScissors {
-    static rockPaperScissors() {
-        return 'playerOne'
+    static rockPaperScissors(playerOneMove, playerTwoMove) {
+        if (playerOneMove === "rock") {
+            return "playerOne";
+        }
+
+        return "playerTwo";
     }
 }
 
@@ -12,5 +16,14 @@ describe("Rock Paper Scissors", () => {
         const winner = RockPaperScissors.rockPaperScissors(playerOneMove, playerTwoMove)
 
         expect(winner).toBe('playerOne')
+    })
+
+    it("Given I have chosen scissors When the opponent chooses rock Then the opponent win", () => {
+        const playerOneMove = 'scissors'
+        const playerTwoMove = 'rock'
+
+        const winner = RockPaperScissors.rockPaperScissors(playerOneMove, playerTwoMove)
+
+        expect(winner).toBe('playerTwo')
     })
 })
