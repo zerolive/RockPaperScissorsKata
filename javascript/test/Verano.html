@@ -1,0 +1,2047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verano</title>
+    <style>:root {
+  --fail-color: red;
+  --pass-color: forestgreen;
+  --skip-color: darkgray;
+}
+
+html {
+  box-sizing: border-box;
+  font-family: monospace;
+}
+
+*, :after, :before, form, p {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0 10rem 1rem;
+}
+
+pre {
+  display: contents;
+}
+
+.center-test-counts {
+  justify-content: center;
+  gap: 3rem;
+  font-size: 2em;
+  font-weight: bold;
+  display: flex;
+}
+
+.sticky-on-top {
+  background: #e8e8e8;
+  border-radius: 0 0 10px 10px;
+  padding: .5rem;
+  position: sticky;
+  top: 0;
+}
+
+.suite-description {
+  margin: .5rem;
+  font-size: 30px;
+}
+
+.test {
+  padding: .5rem;
+}
+
+.passes {
+  color: var(--pass-color);
+  background-color: #d6f5d6;
+}
+
+.fails {
+  color: var(--fail-color);
+  background-color: #f9d1d1;
+}
+
+.syntax-error {
+  color: var(--fail-color);
+  text-align: center;
+  background-color: #f9d1d1;
+  padding: .5rem 0;
+  font-size: 30px;
+}
+
+.skips {
+  color: var(--skip-color);
+}
+
+.skip {
+  color: var(--skip-color);
+  background-color: #f0f0f0;
+}
+
+.error-trace {
+  color: var(--fail-color);
+  margin-top: .5rem;
+  margin-left: 2rem;
+}
+
+.error-message {
+  background-color: #f9d1d1;
+  padding: 1rem;
+}
+
+.expected-message {
+  width: auto;
+  background-color: #fe9c9c;
+  border-radius: 10px;
+  margin-left: 2rem;
+  padding: .5rem;
+  display: inline-block;
+}
+
+#passing-test-count {
+  color: var(--pass-color);
+}
+
+#failing-test-count {
+  color: var(--fail-color);
+}
+
+#skipping-test-count {
+  color: var(--skip-color);
+}
+
+.instructions {
+  font-size: x-large;
+}
+
+.instructions-title {
+  color: var(--pass-color);
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+
+.instructions-code {
+  color: #000;
+  margin-top: .5em;
+}
+
+.instructions-step {
+  color: var(--pass-color);
+}
+
+.instructions-higthlight {
+  color: #dc143c;
+}
+
+.instructions-code {
+  color: #a9a9a9;
+}
+
+/*# sourceMappingURL=index.43c24225.css.map */
+</style>
+</head>
+<body>
+    <div id="container">
+        <div class="center-test-counts sticky-on-top" id="header">
+            <div id="passing-test-count"></div>
+            <div id="failing-test-count"></div>
+            <div id="skipping-test-count"></div>
+            <div id="instructions"></div>
+        </div>
+        <div id="body"></div>
+    </div>
+<script defer="">// modules are defined as an array
+// [ module function, map of requires ]
+//
+// map of requires is short require name -> numeric require
+//
+// anything defined in a previous bundle is accessed via the
+// orig method which is the require for previous bundles
+
+(function (modules, entry, mainEntry, parcelRequireName, globalName) {
+  /* eslint-disable no-undef */
+  var globalObject =
+    typeof globalThis !== 'undefined'
+      ? globalThis
+      : typeof self !== 'undefined'
+      ? self
+      : typeof window !== 'undefined'
+      ? window
+      : typeof global !== 'undefined'
+      ? global
+      : {};
+  /* eslint-enable no-undef */
+
+  // Save the require from previous bundle to this closure if any
+  var previousRequire =
+    typeof globalObject[parcelRequireName] === 'function' &&
+    globalObject[parcelRequireName];
+
+  var cache = previousRequire.cache || {};
+  // Do not use `require` to prevent Webpack from trying to bundle this call
+  var nodeRequire =
+    typeof module !== 'undefined' &&
+    typeof module.require === 'function' &&
+    module.require.bind(module);
+
+  function newRequire(name, jumped) {
+    if (!cache[name]) {
+      if (!modules[name]) {
+        // if we cannot find the module within our internal map or
+        // cache jump to the current global require ie. the last bundle
+        // that was added to the page.
+        var currentRequire =
+          typeof globalObject[parcelRequireName] === 'function' &&
+          globalObject[parcelRequireName];
+        if (!jumped && currentRequire) {
+          return currentRequire(name, true);
+        }
+
+        // If there are other bundles on this page the require from the
+        // previous one is saved to 'previousRequire'. Repeat this as
+        // many times as there are bundles until the module is found or
+        // we exhaust the require chain.
+        if (previousRequire) {
+          return previousRequire(name, true);
+        }
+
+        // Try the node require function if it exists.
+        if (nodeRequire && typeof name === 'string') {
+          return nodeRequire(name);
+        }
+
+        var err = new Error("Cannot find module '" + name + "'");
+        err.code = 'MODULE_NOT_FOUND';
+        throw err;
+      }
+
+      localRequire.resolve = resolve;
+      localRequire.cache = {};
+
+      var module = (cache[name] = new newRequire.Module(name));
+
+      modules[name][0].call(
+        module.exports,
+        localRequire,
+        module,
+        module.exports,
+        this
+      );
+    }
+
+    return cache[name].exports;
+
+    function localRequire(x) {
+      var res = localRequire.resolve(x);
+      return res === false ? {} : newRequire(res);
+    }
+
+    function resolve(x) {
+      var id = modules[name][1][x];
+      return id != null ? id : x;
+    }
+  }
+
+  function Module(moduleName) {
+    this.id = moduleName;
+    this.bundle = newRequire;
+    this.exports = {};
+  }
+
+  newRequire.isParcelRequire = true;
+  newRequire.Module = Module;
+  newRequire.modules = modules;
+  newRequire.cache = cache;
+  newRequire.parent = previousRequire;
+  newRequire.register = function (id, exports) {
+    modules[id] = [
+      function (require, module) {
+        module.exports = exports;
+      },
+      {},
+    ];
+  };
+
+  Object.defineProperty(newRequire, 'root', {
+    get: function () {
+      return globalObject[parcelRequireName];
+    },
+  });
+
+  globalObject[parcelRequireName] = newRequire;
+
+  for (var i = 0; i < entry.length; i++) {
+    newRequire(entry[i]);
+  }
+
+  if (mainEntry) {
+    // Expose entry point to Node, AMD or browser globals
+    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js
+    var mainExports = newRequire(mainEntry);
+
+    // CommonJS
+    if (typeof exports === 'object' && typeof module !== 'undefined') {
+      module.exports = mainExports;
+
+      // RequireJS
+    } else if (typeof define === 'function' && define.amd) {
+      define(function () {
+        return mainExports;
+      });
+
+      // <script>
+    } else if (globalName) {
+      this[globalName] = mainExports;
+    }
+  }
+})({"gqZud":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "normalize", ()=>normalize);
+parcelHelpers.export(exports, "Verano", ()=>Verano);
+var _onLoadMoveDocumentToFirstTestFailingJs = require("./presentation/onLoadMoveDocumentToFirstTestFailing.js");
+var _syntaxErrorListenerJs = require("./SyntaxErrorListener.js");
+var _drawerJs = require("./presentation/Drawer.js");
+var _hooksJs = require("./Hooks.js");
+var _normalErrorJs = require("./NormalError.js");
+var _expectJs = require("./expectations/Expect.js");
+window.drawer = new (0, _drawerJs.Drawer)(document);
+let currentTestSuit = null;
+let testSuitsRunning = [];
+const beforeEachHooks = (0, _hooksJs.Hooks).empty();
+const afterAllHooks = (0, _hooksJs.Hooks).empty();
+const afterEachHooks = (0, _hooksJs.Hooks).empty();
+let passingTestCount = 0;
+let failingTestCount = 0;
+let skippingTestCount = 0;
+(0, _syntaxErrorListenerJs.SyntaxErrorListener).onErrorExecute(()=>{
+    drawer.syntaxError();
+});
+const beforeAll = (hook)=>{
+    try {
+        hook();
+    } catch (error) {
+        drawer.errorInBeforeAll(normalize(error));
+    }
+};
+const beforeEach = (hook)=>{
+    beforeEachHooks.add(currentTestSuit, hook);
+};
+const afterAll = (hook)=>{
+    afterAllHooks.add(currentTestSuit, hook);
+};
+const afterEach = (hook)=>{
+    afterEachHooks.add(currentTestSuit, hook);
+};
+const cleanHooks = ()=>{
+    beforeEachHooks.clean(currentTestSuit);
+    afterAllHooks.clean(currentTestSuit);
+    afterEachHooks.clean(currentTestSuit);
+};
+const markAsRunning = (subjectUnderTest)=>{
+    currentTestSuit = subjectUnderTest;
+    testSuitsRunning.push(subjectUnderTest);
+};
+const unmarkAsRunning = (subjectUnderTest)=>{
+    currentTestSuit = null;
+    testSuitsRunning = testSuitsRunning.filter((suit)=>suit !== subjectUnderTest);
+};
+const NO_TEST_SUIT_PROVIDED = ()=>{};
+const describe = (subjectUnderTest, testSuit = NO_TEST_SUIT_PROVIDED)=>{
+    try {
+        drawer.subjectUnderTest(subjectUnderTest);
+        markAsRunning(subjectUnderTest);
+        testSuit();
+        afterAllHooks.execute(testSuitsRunning);
+        cleanHooks();
+        unmarkAsRunning(subjectUnderTest);
+    } catch (error) {
+        drawer.testFailing("An error is thrown in this describe", normalize(error));
+    }
+};
+const NO_TEST_PROVIDED = ()=>{};
+const it = (description, test = NO_TEST_PROVIDED)=>{
+    try {
+        drawer.removeInstructions();
+        beforeEachHooks.execute(testSuitsRunning);
+        test();
+        passingTestCount++;
+        drawer.passingTestCount(passingTestCount);
+        afterEachHooks.execute(testSuitsRunning);
+        drawer.testPassing(description);
+    } catch (error) {
+        failingTestCount++;
+        drawer.failingTestCount(failingTestCount);
+        drawer.testFailing(description, normalize(error));
+    }
+};
+const xit = (description, _)=>{
+    drawer.removeInstructions();
+    drawer.skippedTest(description);
+    skippingTestCount++;
+    drawer.skippingTestCount(skippingTestCount);
+};
+const expect = (actual)=>{
+    return new (0, _expectJs.Expect)(actual);
+};
+const normalize = (error)=>{
+    if (error.isExpectationError) return error;
+    return new (0, _normalErrorJs.NormalError)(error);
+};
+const Verano = ()=>{
+    window.drawer = drawer;
+    window.currentTestSuit = currentTestSuit;
+    window.testSuitsRunning = testSuitsRunning;
+    window.beforeEachHooks = beforeEachHooks;
+    window.afterAllHooks = afterAllHooks;
+    window.afterEachHooks = afterEachHooks;
+    window.passingTestCount = passingTestCount;
+    window.failingTestCount = failingTestCount;
+    window.skippingTestCount = skippingTestCount;
+    window.beforeAll = beforeAll;
+    window.beforeEach = beforeEach;
+    window.afterAll = afterAll;
+    window.afterEach = afterEach;
+    window.describe = describe;
+    window.it = it;
+    window.xit = xit;
+    window.expect = expect;
+    (0, _onLoadMoveDocumentToFirstTestFailingJs.onLoadMoveDocumentToFirstTestFailing)();
+    drawer.drawInstructionsForCreateATest();
+};
+Verano();
+
+},{"./presentation/onLoadMoveDocumentToFirstTestFailing.js":"lpvqV","./SyntaxErrorListener.js":"idFUq","./presentation/Drawer.js":"iryFf","./Hooks.js":"1MtL1","./NormalError.js":"2qNwv","./expectations/Expect.js":"fw90N","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lpvqV":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "onLoadMoveDocumentToFirstTestFailing", ()=>onLoadMoveDocumentToFirstTestFailing);
+const onLoadMoveDocumentToFirstTestFailing = function() {
+    window.addEventListener("load", function() {
+        const testFailing = document.querySelector(".js-test-failing");
+        if (testFailing) testFailing.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+            inline: "center"
+        });
+    });
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"idFUq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "SyntaxErrorListener", ()=>SyntaxErrorListener);
+class SyntaxErrorListener {
+    static onErrorExecute(aFunction) {
+        const listener = new SyntaxErrorListener(window);
+        listener.onErrorExecute(aFunction);
+    }
+    constructor(myWindow){
+        this.myWindow = myWindow;
+    }
+    onErrorExecute(aFunction) {
+        this.myWindow.onerror = aFunction;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iryFf":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Drawer", ()=>Drawer);
+var _errorPresenterJs = require("./ErrorPresenter.js");
+class Drawer {
+    static ERROR_BEFORE_ALL_MESSAGE = "There are errors in beforeAll hook";
+    static PASSING_TEST_COUNT = "Test passed";
+    static FAILING_TEST_COUNT = "Test failed";
+    static SKIPPING_TEST_COUNT = "Test skipped";
+    constructor(document){
+        this.document = document;
+        this.continueDrawing = true;
+    }
+    subjectUnderTest(text) {
+        const subjectEmoji = "&#128218;";
+        const titleHTML = `<h1 class="suite-description">${subjectEmoji} ${text}</h1>`;
+        this._appendHTMLToBody(titleHTML);
+    }
+    testPassing(text) {
+        const textHTML = this._htmlTestPassing(text);
+        this._appendHTMLToBody(textHTML);
+    }
+    testFailing(text, error) {
+        const failEmoji = "&#x274C;";
+        const failText = `${text} ${failEmoji}`;
+        const textHTML = this._htmlTestFailing(failText, error);
+        this._appendHTMLToBody(textHTML);
+    }
+    skippedTest(text) {
+        const skippedEmoji = "&#x1F634;";
+        const skippedlText = `${text} ${skippedEmoji}`;
+        const textHTML = this._htmlSkippedTest(skippedlText);
+        this._appendHTMLToBody(textHTML);
+    }
+    passingTestCount(quantity) {
+        const textHTML = this._htmlPassingTestCount(quantity);
+        this._updateElementWith("#passing-test-count", textHTML);
+    }
+    failingTestCount(quantity) {
+        const textHTML = this._htmlFailingTestCount(quantity);
+        this._updateElementWith("#failing-test-count", textHTML);
+    }
+    skippingTestCount(quantity) {
+        const textHTML = this._htmlSkippingTestCount(quantity);
+        this._updateElementWith("#skipping-test-count", textHTML);
+    }
+    errorInBeforeAll(error) {
+        this.testFailing(Drawer.ERROR_BEFORE_ALL_MESSAGE, error);
+    }
+    syntaxError() {
+        const element = this.document.querySelector("#container");
+        const emoji = "&#9997;";
+        element.innerHTML = `
+        <div class="syntax-error">There are a syntax error. ${emoji}</div>
+    `;
+        this.continueDrawing = false;
+    }
+    removeInstructions() {
+        const element = this._instructionsElement();
+        element.innerHTML = "";
+    }
+    drawInstructionsForCreateATest() {
+        const element = this._instructionsElement();
+        element.innerHTML = `
+      <div class="instructions">
+        <h1 class="instructions-title">🖊️ How create your first test:</h1>
+        <div><span class="instructions-step">1º</span> Create a file called <span class="instructions-higthlight">"Tests.js"</span> in the same folder where you have <span class="instructions-higthlight">"Verano.html"</span></div>
+        <div><span class="instructions-step">2º</span> Copy the following code in <span class="instructions-higthlight">"Tests.js"</span> file:</div>
+        <pre class="instructions-code">
+          <code>
+describe("Tests", () => {
+  it("fails", () => {
+    expect(true).toBe(false)
+  })
+})
+          </code>
+        </pre>
+      </div>
+    `;
+    }
+    _appendHTMLToBody(html) {
+        const element = this.document.querySelector("#body");
+        if (this.continueDrawing) element.innerHTML += html;
+    }
+    _updateElementWith(selector, html) {
+        const element = this.document.querySelector(selector);
+        if (this.continueDrawing) element.innerHTML = html;
+    }
+    _htmlTestPassing(text) {
+        return `<h3 class="test passes">${text}</h3>`;
+    }
+    _htmlSkippedTest(text) {
+        return `<h3 class="test skip">${text}</h3>`;
+    }
+    _htmlTestFailing(text, error) {
+        return (0, _errorPresenterJs.ErrorPresenter).with(text, error).asHtml();
+    }
+    _htmlPassingTestCount(quantity) {
+        const passedEmoji = "&#127881;";
+        return `<div id="passing-test-count">${Drawer.PASSING_TEST_COUNT}: ${quantity} ${passedEmoji}</div>`;
+    }
+    _htmlFailingTestCount(quantity) {
+        const failedEmoji = "&#128128;";
+        return `<div id="failing-test-count">${Drawer.FAILING_TEST_COUNT}: ${quantity} ${failedEmoji}</div>`;
+    }
+    _htmlSkippingTestCount(quantity) {
+        const skippedEmoji = "&#x1F634;";
+        return `<div id="skipping-test-count">${Drawer.SKIPPING_TEST_COUNT}: ${quantity} ${skippedEmoji}</div>`;
+    }
+    _instructionsElement() {
+        return this.document.querySelector("#instructions");
+    }
+}
+
+},{"./ErrorPresenter.js":"7rLC6","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7rLC6":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ErrorPresenter", ()=>ErrorPresenter);
+class ErrorPresenter {
+    static with(text, error) {
+        return new ErrorPresenter(text, error);
+    }
+    constructor(text, error){
+        this.text = text;
+        this.error = error;
+    }
+    asHtml() {
+        return `
+      <h3 class="test fails js-test-failing">${this.text}</h3>
+      <div class="error-message">${this._buildMainMessage()} ${this._formatTrace()}</div>
+    `;
+    }
+    _formatTrace() {
+        const stackTrace = this.error.stackTrace();
+        const formattedContent = stackTrace.map(this._addErrorTraceClass.bind(this));
+        const contentAsString = formattedContent.join("");
+        return `<p>${contentAsString}</p>`;
+    }
+    _addErrorTraceClass(line) {
+        if (!this._isIncludedInTitle(line)) return `<p class="error-trace">${line}</p>`;
+    }
+    _isIncludedInTitle(line) {
+        const title = this._buildMainMessage();
+        return title === line;
+    }
+    _buildMainMessage() {
+        let message = this.error.rawMessage();
+        this._errorArguments().forEach((argument)=>{
+            const value = this._beautify(argument);
+            message = this._interpolate(message, argument, value);
+        });
+        message = this._addLineBreaksTo(message);
+        return `<div class="expected-message">${message}</div>`;
+    }
+    _errorArguments() {
+        return Object.keys(this.error.arguments());
+    }
+    _interpolate(text, key, value) {
+        return text.replace("%" + key, value);
+    }
+    _addLineBreaksTo(message) {
+        return message.replaceAll("%br", "<br />");
+    }
+    _beautify(name) {
+        let argument = this.error.arguments()[name];
+        if (!this._isMessage(name)) {
+            if (this._isString(argument)) argument = this._addQuotesMarks(argument);
+            if (this._isList(argument)) argument = this._showAsList(argument);
+        }
+        return `<strong>${argument}</strong>`;
+    }
+    _addQuotesMarks(value) {
+        return `<pre>"${value}"</pre>`;
+    }
+    _showAsList(value) {
+        return JSON.stringify(value);
+    }
+    _isMessage(value) {
+        return value === "message";
+    }
+    _isString(value) {
+        return typeof value === "string";
+    }
+    _isList(value) {
+        return Array.isArray(value);
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1MtL1":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Hooks", ()=>Hooks);
+class Hooks {
+    static empty() {
+        return new Hooks();
+    }
+    constructor(){
+        this.hooks = {};
+    }
+    add(suitName, hook) {
+        if (!this.hooks[suitName]) this.hooks[suitName] = [];
+        this.hooks[suitName].push(hook);
+    }
+    execute(suitNames) {
+        suitNames.forEach((suit)=>{
+            const hooks = this.hooks[suit];
+            if (hooks) hooks.forEach((hook)=>hook());
+        });
+    }
+    clean(suitName) {
+        delete this.hooks[suitName];
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2qNwv":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "NormalError", ()=>NormalError);
+var _stackTraceJs = require("./expectations/errors/support/StackTrace.js");
+class NormalError extends Error {
+    constructor(error){
+        super();
+        this.error = error;
+    }
+    stackTrace() {
+        return (0, _stackTraceJs.StackTrace).removeVeranoFrom(this._stack());
+    }
+    rawMessage() {
+        return this.error.toString();
+    }
+    arguments() {
+        return {};
+    }
+    _stack() {
+        if (this._hasErrorStack()) return this.error.stack;
+        else return this.stack;
+    }
+    _hasErrorStack() {
+        return this.error instanceof Error;
+    }
+}
+
+},{"./expectations/errors/support/StackTrace.js":"7hnSp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7hnSp":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "StackTrace", ()=>StackTrace);
+var _configJs = require("../../../Config.js");
+const StackTrace = class {
+    EMPTY_STACK = [];
+    static removeVeranoFrom(stack) {
+        return new StackTrace(stack).removeVerano();
+    }
+    constructor(stack){
+        this.stack = stack;
+    }
+    removeVerano() {
+        if (!this._thereIsStack()) return this.EMPTY_STACK;
+        const stackTrace = this._stackAsArray();
+        const stack = (0, _configJs.Config).customizeStackTrace(stackTrace);
+        return stack;
+    }
+    _stackAsArray = ()=>{
+        return this.stack.split("\n");
+    };
+    _removeVeranoLines = (line)=>{
+        return !line.includes(this._filenameToRemove());
+    };
+    _thereIsStack() {
+        return !!this.stack;
+    }
+};
+
+},{"../../../Config.js":"kozoU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kozoU":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Config", ()=>Config);
+const customizeStackTrace = (stackTrace)=>{
+    let stack = stackTrace.filter((line)=>!line.includes("Verano.html"));
+    return stack;
+};
+class Config {
+    static customizeStackTrace = customizeStackTrace;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fw90N":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Expect", ()=>Expect);
+var _actualAndExpectedValueDoNotMatchErrorJs = require("./errors/ActualAndExpectedValueDoNotMatchError.js");
+var _commonMistakeErrorJs = require("./errors/CommonMistakeError.js");
+var _onlyCanUseIncludeMatcherIfActualIsAStringOrListErrorJs = require("./errors/OnlyCanUseIncludeMatcherIfActualIsAStringOrListError.js");
+var _expectAnErrorJs = require("./ExpectAnError.js");
+var _expectDictionaryJs = require("./ExpectDictionary.js");
+var _expectListsJs = require("./ExpectLists.js");
+var _expectNullJs = require("./ExpectNull.js");
+var _expectToBeFalsyJs = require("./ExpectToBeFalsy.js");
+var _expectToBeUndefinedJs = require("./ExpectToBeUndefined.js");
+var _expectToBeZeroJs = require("./ExpectToBeZero.js");
+var _expectToIncludeElementJs = require("./ExpectToIncludeElement.js");
+var _expectToIncludeSubstringJs = require("./ExpectToIncludeSubstring.js");
+var _expectTruthJs = require("./ExpectTruth.js");
+class Expect {
+    constructor(actual){
+        this.actual = actual;
+        this.conditionForThrowError = this._notEqual;
+        this.isNegated = false;
+    }
+    get not() {
+        this.conditionForThrowError = this._equal;
+        this.isNegated = true;
+        return this;
+    }
+    toBe(expected) {
+        if (this._hasToCompareLists(expected)) this._compareListsActualAnd(expected);
+        else if (this._hasToCompareDictionaries(expected)) this._compareDictionariesActualAnd(expected);
+        else if (this.conditionForThrowError(this.actual, expected)) throw new (0, _actualAndExpectedValueDoNotMatchErrorJs.ActualAndExpectedValueDoNotMatchError)(this.actual, expected, this.isNegated);
+    }
+    toBeTruthy() {
+        if (this.isNegated) new (0, _expectTruthJs.ExpectTruth)(this.actual).not.toBeTruthy();
+        else new (0, _expectTruthJs.ExpectTruth)(this.actual).toBeTruthy();
+    }
+    toBeFalsy() {
+        if (this.isNegated) new (0, _expectToBeFalsyJs.ExpectToBeFalsy)(this.actual).not.toBeFalsy();
+        else new (0, _expectToBeFalsyJs.ExpectToBeFalsy)(this.actual).toBeFalsy();
+    }
+    toBeNull() {
+        if (this.isNegated) new (0, _expectNullJs.ExpectNull)(this.actual).not.toBeNull();
+        else new (0, _expectNullJs.ExpectNull)(this.actual).toBeNull();
+    }
+    toThrowAnError(expected) {
+        if (this.isNegated) new (0, _expectAnErrorJs.ExpectAnError)(this.actual).not.toThrowAnError(expected);
+        else new (0, _expectAnErrorJs.ExpectAnError)(this.actual).toThrowAnError(expected);
+    }
+    toBeUndefined() {
+        if (this.isNegated) new (0, _expectToBeUndefinedJs.ExpectToBeUndefined)(this.actual).not.toBeUndefined();
+        else new (0, _expectToBeUndefinedJs.ExpectToBeUndefined)(this.actual).toBeUndefined();
+    }
+    toBeZero() {
+        if (this.isNegated) new (0, _expectToBeZeroJs.ExpectToBeZero)(this.actual).not.toBeZero();
+        else new (0, _expectToBeZeroJs.ExpectToBeZero)(this.actual).toBeZero();
+    }
+    include(expected) {
+        if (this._isActualAString()) this._checkIfActualIncludesSubstring(expected);
+        else if (this._isActualAList()) this._checkIfActualIncludesElement(expected);
+        else throw new (0, _onlyCanUseIncludeMatcherIfActualIsAStringOrListErrorJs.OnlyCanUseIncludeMatcherIfActualIsAStringOrListError)();
+    }
+    tobe(_) {
+        throw new (0, _commonMistakeErrorJs.CommonMistakeError)();
+    }
+    _checkIfActualIncludesSubstring(expected) {
+        if (this.isNegated) new (0, _expectToIncludeSubstringJs.ExpectToIncludeSubstring)(this.actual).not.include(expected);
+        else new (0, _expectToIncludeSubstringJs.ExpectToIncludeSubstring)(this.actual).include(expected);
+    }
+    _checkIfActualIncludesElement(expected) {
+        if (this.isNegated) new (0, _expectToIncludeElementJs.ExpectToIncludeElement)(this.actual).not.include(expected);
+        else new (0, _expectToIncludeElementJs.ExpectToIncludeElement)(this.actual).include(expected);
+    }
+    _compareListsActualAnd(expected) {
+        if (this.isNegated) new (0, _expectListsJs.ExpectLists)(this.actual).not.toBe(expected);
+        else new (0, _expectListsJs.ExpectLists)(this.actual).toBe(expected);
+    }
+    _compareDictionariesActualAnd(expected) {
+        if (this.isNegated) new (0, _expectDictionaryJs.ExpectDictionary)(this.actual).not.toBe(expected);
+        else new (0, _expectDictionaryJs.ExpectDictionary)(this.actual).toBe(expected);
+    }
+    _hasToCompareLists(expected) {
+        return Array.isArray(expected) && this._isActualAList();
+    }
+    _isActualAList() {
+        return Array.isArray(this.actual);
+    }
+    _isActualAString() {
+        return typeof this.actual === "string";
+    }
+    _hasToCompareDictionaries(expected) {
+        const expectedIsADictionary = this._isADictionary(expected);
+        const actualIsADictionary = this._isADictionary(this.actual);
+        return expectedIsADictionary && actualIsADictionary;
+    }
+    _isADictionary(value) {
+        if (value === null) return false;
+        return typeof value === "object" && value.constructor === Object;
+    }
+    _equal(value, anotherValue) {
+        return value === anotherValue;
+    }
+    _notEqual(value, anotherValue) {
+        return value !== anotherValue;
+    }
+}
+
+},{"./errors/ActualAndExpectedValueDoNotMatchError.js":"5EByb","./errors/CommonMistakeError.js":"ZPVQY","./errors/OnlyCanUseIncludeMatcherIfActualIsAStringOrListError.js":"lB8PS","./ExpectAnError.js":"auCcm","./ExpectDictionary.js":"9zp82","./ExpectLists.js":"fkkYt","./ExpectNull.js":"7hmXd","./ExpectToBeFalsy.js":"3FQjd","./ExpectToBeUndefined.js":"8Xc7I","./ExpectToBeZero.js":"hKaoO","./ExpectToIncludeElement.js":"jzLVJ","./ExpectToIncludeSubstring.js":"6zZCV","./ExpectTruth.js":"bRL4c","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5EByb":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ActualAndExpectedValueDoNotMatchError", ()=>ActualAndExpectedValueDoNotMatchError);
+var _expectationErrorJs = require("./ExpectationError.js");
+class ActualAndExpectedValueDoNotMatchError extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(actual, expected, isNegated = false){
+        super();
+        this.actual = actual;
+        this.expected = expected;
+        this.isNegated = isNegated;
+    }
+    rawMessage() {
+        return `
+      %message%br
+      Received: %actual%br
+      Expected: %expected%br
+    `;
+    }
+    arguments() {
+        return {
+            actual: this.actual,
+            expected: this.expected,
+            message: this._buildMessage()
+        };
+    }
+    _buildMessage() {
+        let message = "To be equal";
+        if (this.isNegated) message = "NOT to be equal";
+        return message;
+    }
+}
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"esgIY":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ExpectationError", ()=>ExpectationError);
+var _stackTraceJs = require("./support/StackTrace.js");
+const ExpectationError = class extends Error {
+    constructor(){
+        super();
+        this.isExpectationError = true;
+    }
+    stackTrace() {
+        return (0, _stackTraceJs.StackTrace).removeVeranoFrom(this.stack);
+    }
+};
+
+},{"./support/StackTrace.js":"7hnSp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ZPVQY":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "CommonMistakeError", ()=>CommonMistakeError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const CommonMistakeError = class extends (0, _expectationErrorJs.ExpectationError) {
+    rawMessage() {
+        return "You have used the method %tobe, did you mean to use %toBe?";
+    }
+    arguments() {
+        return {
+            tobe: "tobe",
+            toBe: "toBe"
+        };
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lB8PS":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "OnlyCanUseIncludeMatcherIfActualIsAStringOrListError", ()=>OnlyCanUseIncludeMatcherIfActualIsAStringOrListError);
+var _expectationListErrorJs = require("./ExpectationListError.js");
+const OnlyCanUseIncludeMatcherIfActualIsAStringOrListError = class extends (0, _expectationListErrorJs.ExpectationListError) {
+    MESSAGE_POSITIVE = "The lists have different values";
+    rawMessage() {
+        return "Only can use the matcher #include when actual value type are strings or lists";
+    }
+    arguments() {
+        return {};
+    }
+};
+
+},{"./ExpectationListError.js":"aulqV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aulqV":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ExpectationListError", ()=>ExpectationListError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const ExpectationListError = class extends (0, _expectationErrorJs.ExpectationError) {
+    MESSAGE_NEGATIVE = "The lists are equal";
+    constructor(actual, expected, isNegated){
+        super();
+        this.actual = actual;
+        this.expected = expected;
+        this.isNegated = isNegated;
+    }
+    _selectMessage() {
+        let message = this.MESSAGE_POSITIVE;
+        if (this.isNegated) message = this.MESSAGE_NEGATIVE;
+        return message;
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"auCcm":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ExpectAnError", ()=>ExpectAnError);
+var _hasNotToThrowAnErrorErrorJs = require("./errors/HasNotToThrowAnErrorError.js");
+var _hasNotToThrowASpecificErrorErrorJs = require("./errors/HasNotToThrowASpecificErrorError.js");
+var _hasToThrowAnErrorErrorJs = require("./errors/HasToThrowAnErrorError.js");
+var _hasToThrowExpectedErrorErrorJs = require("./errors/HasToThrowExpectedErrorError.js");
+const ExpectAnError = class {
+    constructor(act){
+        this.isNegated = false;
+        this.act = act;
+    }
+    get not() {
+        this.isNegated = true;
+        return this;
+    }
+    toThrowAnError(expected) {
+        if (this.isNegated) this._hasNotToThrowError(expected);
+        else this._hasToThrowError(expected);
+    }
+    _hasNotToThrowError(expected) {
+        try {
+            this.act();
+        } catch (error) {
+            if (expected) throw new (0, _hasNotToThrowASpecificErrorErrorJs.HasNotToThrowASpecificErrorError)(error);
+            else throw new (0, _hasNotToThrowAnErrorErrorJs.HasNotToThrowAnErrorError)(error);
+        }
+    }
+    _hasToThrowError(expected) {
+        let errorWasThrowed = false;
+        try {
+            this.act();
+        } catch (error) {
+            errorWasThrowed = true;
+            if (expected) {
+                const isThrowingSpecificError = error instanceof expected;
+                if (!isThrowingSpecificError) throw new (0, _hasToThrowExpectedErrorErrorJs.HasToThrowExpectedErrorError)(error, expected);
+            }
+        }
+        if (!errorWasThrowed) throw new (0, _hasToThrowAnErrorErrorJs.HasToThrowAnErrorError)();
+    }
+};
+
+},{"./errors/HasNotToThrowAnErrorError.js":"8YcMU","./errors/HasNotToThrowASpecificErrorError.js":"gRCIU","./errors/HasToThrowAnErrorError.js":"4Eg13","./errors/HasToThrowExpectedErrorError.js":"5piaj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8YcMU":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "HasNotToThrowAnErrorError", ()=>HasNotToThrowAnErrorError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const HasNotToThrowAnErrorError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(retievedError){
+        super();
+        this.retievedError = retievedError;
+    }
+    rawMessage() {
+        return `
+      Expect not to throw an error,%br
+      but was thrown: %error
+    `;
+    }
+    arguments() {
+        return {
+            error: this._retrivedErrorType()
+        };
+    }
+    _retrivedErrorType() {
+        return this.retievedError.constructor.name;
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gRCIU":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "HasNotToThrowASpecificErrorError", ()=>HasNotToThrowASpecificErrorError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const HasNotToThrowASpecificErrorError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(retievedError){
+        super();
+        this.retievedError = retievedError;
+    }
+    rawMessage() {
+        return `
+      Expect not to throw error %error,%br
+      but was thrown.
+    `;
+    }
+    arguments() {
+        return {
+            error: this._retrivedErrorType()
+        };
+    }
+    _retrivedErrorType() {
+        return this.retievedError.constructor.name;
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4Eg13":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "HasToThrowAnErrorError", ()=>HasToThrowAnErrorError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const HasToThrowAnErrorError = class extends (0, _expectationErrorJs.ExpectationError) {
+    rawMessage() {
+        return "Expect to raise an error, but nothing happens";
+    }
+    arguments() {
+        return {};
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5piaj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "HasToThrowExpectedErrorError", ()=>HasToThrowExpectedErrorError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const HasToThrowExpectedErrorError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(actual, expected){
+        super();
+        this.actual = actual;
+        this.expected = expected;
+    }
+    rawMessage() {
+        return "Expect to throw error %expected, but throws error %actual";
+    }
+    arguments() {
+        return {
+            actual: this.actual.constructor.name,
+            expected: this.expected.name
+        };
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9zp82":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ExpectDictionary", ()=>ExpectDictionary);
+var _dictionariesAreEqualErrorJs = require("./errors/DictionariesAreEqualError.js");
+var _haveDifferentKeysErrorJs = require("./errors/HaveDifferentKeysError.js");
+var _haveDifferentKeysQuantityErrorJs = require("./errors/HaveDifferentKeysQuantityError.js");
+var _haveDifferentValuesErrorJs = require("./errors/HaveDifferentValuesError.js");
+const ExpectDictionary = class {
+    constructor(actual){
+        this.hasToBeDifferentDictionaries = false;
+        this.actual = actual;
+    }
+    get not() {
+        this.hasToBeDifferentDictionaries = true;
+        return this;
+    }
+    toBe(expected) {
+        const haveDifferentQuantityOfKeys = this._haveDifferentQuantityOfKeys(this.actual, expected);
+        const haveDifferentKeys = this._haveDifferentKeys(this.actual, expected);
+        const haveDifferentValues = this._haveDifferentValues(this.actual, expected);
+        if (this.hasToBeDifferentDictionaries) {
+            const areTheSameDictionary = !haveDifferentQuantityOfKeys && !haveDifferentKeys && !haveDifferentValues;
+            if (areTheSameDictionary) throw new (0, _dictionariesAreEqualErrorJs.DictionariesAreEqualError)();
+        } else {
+            if (haveDifferentQuantityOfKeys) throw new (0, _haveDifferentKeysQuantityErrorJs.HaveDifferentKeysQuantityError)(this.actual, expected);
+            if (haveDifferentKeys) throw new (0, _haveDifferentKeysErrorJs.HaveDifferentKeysError)(this.actual, expected);
+            if (haveDifferentValues) throw new (0, _haveDifferentValuesErrorJs.HaveDifferentValuesError)(this.actual, expected);
+        }
+    }
+    _haveDifferentQuantityOfKeys(actual, expected) {
+        const actualKeys = Object.keys(actual);
+        const expectedKeys = Object.keys(expected);
+        const haveDifferentQuantityOfKeys = actualKeys.length !== expectedKeys.length;
+        return haveDifferentQuantityOfKeys;
+    }
+    _haveDifferentKeys(actual, expected) {
+        const actualKeys = Object.keys(actual);
+        const expectedKeys = Object.keys(expected);
+        let haveDifferentKeys = false;
+        actualKeys.forEach((key)=>{
+            if (!expectedKeys.includes(key)) haveDifferentKeys = true;
+        });
+        expectedKeys.forEach((key)=>{
+            if (!actualKeys.includes(key)) haveDifferentKeys = true;
+        });
+        return haveDifferentKeys;
+    }
+    _haveDifferentValues(actual, expected) {
+        let haveDifferentValues = false;
+        for (let [index, value] of Object.entries(actual))if (expected[index] !== value) haveDifferentValues = true;
+        for (let [index1, value1] of Object.entries(expected))if (actual[index1] !== value1) haveDifferentValues = true;
+        return haveDifferentValues;
+    }
+    _equal(value, anotherValue) {
+        return value === anotherValue;
+    }
+};
+
+},{"./errors/DictionariesAreEqualError.js":"34x0W","./errors/HaveDifferentKeysError.js":"acTOL","./errors/HaveDifferentKeysQuantityError.js":"3chjm","./errors/HaveDifferentValuesError.js":"bkxjJ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"34x0W":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "DictionariesAreEqualError", ()=>DictionariesAreEqualError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const DictionariesAreEqualError = class extends (0, _expectationErrorJs.ExpectationError) {
+    rawMessage() {
+        return "The dictionaries are equal";
+    }
+    arguments() {
+        return {};
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"acTOL":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "HaveDifferentKeysError", ()=>HaveDifferentKeysError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const HaveDifferentKeysError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(actual, expected){
+        super();
+        this.actual = actual;
+        this.expected = expected;
+    }
+    rawMessage() {
+        return `
+      Dictionaries have different keys:%br
+      Received: %actual%br
+      Expected: %expected%br
+    `;
+    }
+    arguments() {
+        return {
+            actual: this._orderedActual(),
+            expected: this._orderedExpected()
+        };
+    }
+    _orderedActual() {
+        const orderedKeys = this._order(this.actual);
+        return orderedKeys;
+    }
+    _orderedExpected() {
+        const orderedKeys = this._order(this.expected);
+        return orderedKeys;
+    }
+    _order(dictionary) {
+        const ordered = {};
+        const keys = Object.keys(dictionary);
+        const copyDictionary = {
+            ...dictionary
+        };
+        const orderedKeys = keys.sort();
+        orderedKeys.forEach((key)=>{
+            ordered[key] = copyDictionary[key];
+            delete copyDictionary[key];
+        });
+        return JSON.stringify(ordered);
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3chjm":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "HaveDifferentKeysQuantityError", ()=>HaveDifferentKeysQuantityError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const HaveDifferentKeysQuantityError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(actual, expected){
+        super();
+        this.actual = actual;
+        this.expected = expected;
+    }
+    rawMessage() {
+        return `
+      Dictionaries have different quantity of keys:%br
+      Received: %actual%br
+      Expected: %expected%br
+    `;
+    }
+    arguments() {
+        return {
+            actual: this._orderedActual(),
+            expected: this._orderedExpected()
+        };
+    }
+    _orderedActual() {
+        const orderedKeys = this._order(this.actual);
+        return orderedKeys;
+    }
+    _orderedExpected() {
+        const orderedKeys = this._order(this.expected);
+        return orderedKeys;
+    }
+    _order(dictionary) {
+        const ordered = {};
+        const keys = Object.keys(dictionary);
+        const copyDictionary = {
+            ...dictionary
+        };
+        const orderedKeys = keys.sort();
+        orderedKeys.forEach((key)=>{
+            ordered[key] = copyDictionary[key];
+            delete copyDictionary[key];
+        });
+        return JSON.stringify(ordered);
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bkxjJ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "HaveDifferentValuesError", ()=>HaveDifferentValuesError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const HaveDifferentValuesError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(actual, expected){
+        super();
+        this.actual = actual;
+        this.expected = expected;
+    }
+    rawMessage() {
+        return `
+      Dictionaries have different values:%br
+      Received: %actual%br
+      Expected: %expected%br
+    `;
+    }
+    arguments() {
+        return {
+            actual: this._orderedActual(),
+            expected: this._orderedExpected()
+        };
+    }
+    _orderedActual() {
+        const orderedKeys = this._order(this.actual);
+        return orderedKeys;
+    }
+    _orderedExpected() {
+        const orderedKeys = this._order(this.expected);
+        return orderedKeys;
+    }
+    _order(dictionary) {
+        const ordered = {};
+        const keys = Object.keys(dictionary);
+        const copyDictionary = {
+            ...dictionary
+        };
+        const orderedKeys = keys.sort();
+        orderedKeys.forEach((key)=>{
+            ordered[key] = copyDictionary[key];
+            delete copyDictionary[key];
+        });
+        return JSON.stringify(ordered);
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fkkYt":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ExpectLists", ()=>ExpectLists);
+var _listWithDifferentOrderErrorJs = require("./errors/ListWithDifferentOrderError.js");
+var _listWithDifferentSizesErrorJs = require("./errors/ListWithDifferentSizesError.js");
+var _listWithDifferentValuesErrorJs = require("./errors/ListWithDifferentValuesError.js");
+class ExpectLists {
+    constructor(actual){
+        this.actual = actual;
+        this.conditionForThrowError = this._notEqual;
+        this.isNegated = false;
+    }
+    get not() {
+        this.conditionForThrowError = this._equal;
+        this.isNegated = true;
+        return this;
+    }
+    toBe(expected) {
+        if (this._conditionForThrowErrorBySizes(expected)) throw new (0, _listWithDifferentSizesErrorJs.ListWithDifferentSizesError)(this.actual, expected, this.isNegated);
+        if (this._conditionForThrowErrorByValues(expected)) throw new (0, _listWithDifferentValuesErrorJs.ListWithDifferentValuesError)(this.actual, expected, this.isNegated);
+        if (this._conditionForThrowErrorByOrders(expected)) throw new (0, _listWithDifferentOrderErrorJs.ListWithDifferentOrderError)(this.actual, expected, this.isNegated);
+    }
+    _conditionForThrowErrorBySizes(expected) {
+        return this.conditionForThrowError(this.actual.length, expected.length);
+    }
+    _conditionForThrowErrorByValues(expected) {
+        const clonedActual = [
+            ...this.actual
+        ];
+        const cloneExpected = [
+            ...expected
+        ];
+        const sortedActual = clonedActual.sort();
+        const sortedExpected = cloneExpected.sort();
+        return this.conditionForThrowError(this._toString(sortedActual), this._toString(sortedExpected));
+    }
+    _conditionForThrowErrorByOrders(expected) {
+        return this.conditionForThrowError(this._toString(this.actual), this._toString(expected));
+    }
+    _toString(value) {
+        return JSON.stringify(value);
+    }
+    _equal(value, anotherValue) {
+        return value === anotherValue;
+    }
+    _notEqual(value, anotherValue) {
+        return value !== anotherValue;
+    }
+}
+
+},{"./errors/ListWithDifferentOrderError.js":"75cZp","./errors/ListWithDifferentSizesError.js":"hky5P","./errors/ListWithDifferentValuesError.js":"l3pj6","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"75cZp":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ListWithDifferentOrderError", ()=>ListWithDifferentOrderError);
+var _expectationListErrorJs = require("./ExpectationListError.js");
+const ListWithDifferentOrderError = class extends (0, _expectationListErrorJs.ExpectationListError) {
+    MESSAGE_POSITIVE = "The lists have different order";
+    rawMessage() {
+        return `
+      %message%br
+      Received list: %actual%br
+      Expected list: %expected%br
+    `;
+    }
+    arguments() {
+        return {
+            message: this._selectMessage(),
+            actual: this.actual,
+            expected: this.expected
+        };
+    }
+};
+
+},{"./ExpectationListError.js":"aulqV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hky5P":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ListWithDifferentSizesError", ()=>ListWithDifferentSizesError);
+var _expectationListErrorJs = require("./ExpectationListError.js");
+const ListWithDifferentSizesError = class extends (0, _expectationListErrorJs.ExpectationListError) {
+    MESSAGE_POSITIVE = "The lists have different sizes";
+    rawMessage() {
+        return this._selectRawMessage();
+    }
+    arguments() {
+        return {
+            message: this._selectMessage(),
+            actualSize: this.actual.length,
+            actual: this.actual,
+            expectedSize: this.expected.length,
+            expected: this.expected
+        };
+    }
+    _selectRawMessage() {
+        let message = this._positiveRawMessage();
+        if (this.isNegated) message = this._negatedRawMessage();
+        return message;
+    }
+    _positiveRawMessage() {
+        return `
+      %message%br
+      Received size: %actualSize%br
+      Expected size: %expectedSize%br
+      %br
+      Received list: %actual%br
+      Expected list: %expected%br
+    `;
+    }
+    _negatedRawMessage() {
+        return `
+      %message%br
+      Received list: %actual%br
+      Expected list: %expected%br
+    `;
+    }
+};
+
+},{"./ExpectationListError.js":"aulqV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l3pj6":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ListWithDifferentValuesError", ()=>ListWithDifferentValuesError);
+var _expectationListErrorJs = require("./ExpectationListError.js");
+const ListWithDifferentValuesError = class extends (0, _expectationListErrorJs.ExpectationListError) {
+    MESSAGE_POSITIVE = "The lists have different values";
+    rawMessage() {
+        return `
+      %message%br
+      Received ordered list: %actual%br
+      Expected ordered list: %expected%br
+    `;
+    }
+    arguments() {
+        return {
+            message: this._selectMessage(),
+            actual: this.actual,
+            expected: this.expected
+        };
+    }
+};
+
+},{"./ExpectationListError.js":"aulqV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7hmXd":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ExpectNull", ()=>ExpectNull);
+var _actualIsNotNullErrorJs = require("./errors/ActualIsNotNullError.js");
+var _actualIsNullErrorJs = require("./errors/ActualIsNullError.js");
+const ExpectNull = class {
+    constructor(actual){
+        this.conditionForThrowError = this._notEqual;
+        this.isNegated = false;
+        this.actual = actual;
+    }
+    get not() {
+        this.conditionForThrowError = this._equal;
+        this.isNegated = true;
+        return this;
+    }
+    toBeNull() {
+        if (this.conditionForThrowError()) throw this._expectationError();
+    }
+    _expectationError() {
+        if (this.isNegated) return new (0, _actualIsNotNullErrorJs.ActualIsNotNullError)(this.actual);
+        else return new (0, _actualIsNullErrorJs.ActualIsNullError)(this.actual);
+    }
+    _notEqual() {
+        return this.actual !== null;
+    }
+    _equal() {
+        return this.actual === null;
+    }
+};
+
+},{"./errors/ActualIsNotNullError.js":"bR1fH","./errors/ActualIsNullError.js":"e4Edr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bR1fH":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ActualIsNotNullError", ()=>ActualIsNotNullError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const ActualIsNotNullError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(actual){
+        super();
+        this.actual = actual;
+    }
+    rawMessage() {
+        return "Expect %actual not to be null";
+    }
+    arguments() {
+        return {
+            actual: this.actual
+        };
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"e4Edr":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ActualIsNullError", ()=>ActualIsNullError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const ActualIsNullError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(actual){
+        super();
+        this.actual = actual;
+    }
+    rawMessage() {
+        return "Expect %actual to be null";
+    }
+    arguments() {
+        return {
+            actual: this.actual
+        };
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3FQjd":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ExpectToBeFalsy", ()=>ExpectToBeFalsy);
+var _actualIsFalsyErrorJs = require("./errors/ActualIsFalsyError.js");
+var _actualIsNotFalsyErrorJs = require("./errors/ActualIsNotFalsyError.js");
+const ExpectToBeFalsy = class {
+    constructor(actual){
+        this.isNegated = false;
+        this.actual = actual;
+    }
+    get not() {
+        this.isNegated = true;
+        return this;
+    }
+    toBeFalsy() {
+        if (this.isNegated) this._throwAnErrorIfActualIsFalsy();
+        else this._throwAnErrorIfActualIsNotFalsy();
+    }
+    _throwAnErrorIfActualIsFalsy() {
+        if (!this.actual) throw new (0, _actualIsFalsyErrorJs.ActualIsFalsyError)(this.actual);
+    }
+    _throwAnErrorIfActualIsNotFalsy() {
+        if (this.actual) throw new (0, _actualIsNotFalsyErrorJs.ActualIsNotFalsyError)(this.actual);
+    }
+};
+
+},{"./errors/ActualIsFalsyError.js":"kf9tk","./errors/ActualIsNotFalsyError.js":"j5aNW","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kf9tk":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ActualIsFalsyError", ()=>ActualIsFalsyError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const ActualIsFalsyError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(actual){
+        super();
+        this.actual = actual;
+    }
+    rawMessage() {
+        return "Expect %actual not to be falsy";
+    }
+    arguments() {
+        return {
+            actual: this.actual
+        };
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"j5aNW":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ActualIsNotFalsyError", ()=>ActualIsNotFalsyError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const ActualIsNotFalsyError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(actual){
+        super();
+        this.actual = actual;
+    }
+    rawMessage() {
+        return "Expect %actual to be falsy";
+    }
+    arguments() {
+        return {
+            actual: this.actual
+        };
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8Xc7I":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ExpectToBeUndefined", ()=>ExpectToBeUndefined);
+var _actualIsNotUndefinedErrorJs = require("./errors/ActualIsNotUndefinedError.js");
+var _actualIsUndefinedErrorJs = require("./errors/ActualIsUndefinedError.js");
+const ExpectToBeUndefined = class {
+    constructor(actual){
+        this.isNegated = false;
+        this.actual = actual;
+    }
+    get not() {
+        this.isNegated = true;
+        return this;
+    }
+    toBeUndefined() {
+        if (this.isNegated) this._throwAnErrorIfIsUndefined();
+        else this._throwAnErrorIfIsNotUndefined();
+    }
+    _throwAnErrorIfIsUndefined() {
+        if (this._isUndefined()) throw new (0, _actualIsUndefinedErrorJs.ActualIsUndefinedError)(this.actual);
+    }
+    _throwAnErrorIfIsNotUndefined() {
+        if (this._isNotUndefined()) throw new (0, _actualIsNotUndefinedErrorJs.ActualIsNotUndefinedError)(this.actual);
+    }
+    _isUndefined() {
+        return this.actual === undefined;
+    }
+    _isNotUndefined() {
+        return this.actual !== undefined;
+    }
+};
+
+},{"./errors/ActualIsNotUndefinedError.js":"joZ0B","./errors/ActualIsUndefinedError.js":"7M9s6","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"joZ0B":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ActualIsNotUndefinedError", ()=>ActualIsNotUndefinedError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const ActualIsNotUndefinedError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(actual){
+        super();
+        this.actual = actual;
+    }
+    rawMessage() {
+        return "Expect %actual NOT to be undefined";
+    }
+    arguments() {
+        return {
+            actual: this.actual
+        };
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7M9s6":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ActualIsUndefinedError", ()=>ActualIsUndefinedError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const ActualIsUndefinedError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(actual){
+        super();
+        this.actual = actual;
+    }
+    rawMessage() {
+        return "Expect %actual to be undefined";
+    }
+    arguments() {
+        return {
+            actual: this.actual
+        };
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hKaoO":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ExpectToBeZero", ()=>ExpectToBeZero);
+var _actualIsNotZeroErrorJs = require("./errors/ActualIsNotZeroError.js");
+var _actualIsZeroErrorJs = require("./errors/ActualIsZeroError.js");
+const ExpectToBeZero = class {
+    constructor(actual){
+        this.actual = actual;
+        this.isNegated = false;
+    }
+    get not() {
+        this.isNegated = true;
+        return this;
+    }
+    toBeZero() {
+        if (this.isNegated) this._isNotEqualToZero();
+        else this._isEqualToZero();
+    }
+    _isEqualToZero() {
+        if (this.actual !== 0) throw new (0, _actualIsNotZeroErrorJs.ActualIsNotZeroError)(this.actual);
+    }
+    _isNotEqualToZero() {
+        if (this.actual === 0) throw new (0, _actualIsZeroErrorJs.ActualIsZeroError)(this.actual);
+    }
+};
+
+},{"./errors/ActualIsNotZeroError.js":"4og3L","./errors/ActualIsZeroError.js":"91uK0","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4og3L":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ActualIsNotZeroError", ()=>ActualIsNotZeroError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const ActualIsNotZeroError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(actual){
+        super();
+        this.actual = actual;
+    }
+    rawMessage() {
+        return "Expect %actual to be Zero";
+    }
+    arguments() {
+        return {
+            actual: this.actual
+        };
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"91uK0":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ActualIsZeroError", ()=>ActualIsZeroError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const ActualIsZeroError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(actual){
+        super();
+        this.actual = actual;
+    }
+    rawMessage() {
+        return "Expect %actual NOT to be Zero";
+    }
+    arguments() {
+        return {
+            actual: this.actual
+        };
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jzLVJ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ExpectToIncludeElement", ()=>ExpectToIncludeElement);
+var _expectedIsIncludedInActualListErrorJs = require("./errors/ExpectedIsIncludedInActualListError.js");
+var _expectedIsNotAListErrorJs = require("./errors/ExpectedIsNotAListError.js");
+var _expectedIsNotIncludedInActualListErrorJs = require("./errors/ExpectedIsNotIncludedInActualListError.js");
+const ExpectToIncludeElement = class {
+    constructor(actual){
+        this._throwErrorIfIsNotAList(actual);
+        this.isNegated = false;
+        this.actual = actual;
+    }
+    get not() {
+        this.isNegated = true;
+        return this;
+    }
+    include(expected) {
+        if (this.isNegated) this._throwAnErrorIfActualIncludes(expected);
+        else this._throwAnErrorIfActualDoesNotInclude(expected);
+    }
+    _throwAnErrorIfActualIncludes(expected) {
+        if (this._isActualIncluding(expected)) throw new (0, _expectedIsIncludedInActualListErrorJs.ExpectedIsIncludedInActualListError)(this.actual, expected);
+    }
+    _throwAnErrorIfActualDoesNotInclude(expected) {
+        if (this._isNotActualIncluding(expected)) throw new (0, _expectedIsNotIncludedInActualListErrorJs.ExpectedIsNotIncludedInActualListError)(this.actual, expected);
+    }
+    _throwErrorIfIsNotAList(actual) {
+        if (this._isNotAList(actual)) throw new (0, _expectedIsNotAListErrorJs.ExpectedIsNotAListError)(actual);
+    }
+    _isNotAList(actual) {
+        return !Array.isArray(actual);
+    }
+    _isActualIncluding(expected) {
+        return this.actual.includes(expected);
+    }
+    _isNotActualIncluding(expected) {
+        return !this.actual.includes(expected);
+    }
+};
+
+},{"./errors/ExpectedIsIncludedInActualListError.js":"bWg7v","./errors/ExpectedIsNotAListError.js":"pVqAF","./errors/ExpectedIsNotIncludedInActualListError.js":"g5RdL","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bWg7v":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ExpectedIsIncludedInActualListError", ()=>ExpectedIsIncludedInActualListError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const ExpectedIsIncludedInActualListError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(actual, expected){
+        super();
+        this.actual = actual;
+        this.expected = expected;
+    }
+    rawMessage() {
+        return `
+      Actual list: %actual%br
+      includes: %expected%br
+    `;
+    }
+    arguments() {
+        return {
+            actual: this.actual,
+            expected: this.expected
+        };
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"pVqAF":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ExpectedIsNotAListError", ()=>ExpectedIsNotAListError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const ExpectedIsNotAListError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(actual){
+        super();
+        this.actual = actual;
+    }
+    rawMessage() {
+        return `
+      %actual%br
+      is not a list, is a %actualType
+    `;
+    }
+    arguments() {
+        return {
+            actual: this.actual,
+            actualType: this._actualType()
+        };
+    }
+    _actualType() {
+        return typeof this.actual;
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"g5RdL":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ExpectedIsNotIncludedInActualListError", ()=>ExpectedIsNotIncludedInActualListError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const ExpectedIsNotIncludedInActualListError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(actual, expected){
+        super();
+        this.actual = actual;
+        this.expected = expected;
+    }
+    rawMessage() {
+        return `
+      Actual list: %actual%br
+      does not include: %expected%br
+    `;
+    }
+    arguments() {
+        return {
+            actual: this.actual,
+            expected: this.expected
+        };
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6zZCV":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ExpectToIncludeSubstring", ()=>ExpectToIncludeSubstring);
+var _expectedIsIncludedInActualStringErrorJs = require("./errors/ExpectedIsIncludedInActualStringError.js");
+var _expectedIsNotAStringErrorJs = require("./errors/ExpectedIsNotAStringError.js");
+var _expectedIsNotIncludedInActualStringErrorJs = require("./errors/ExpectedIsNotIncludedInActualStringError.js");
+const ExpectToIncludeSubstring = class {
+    constructor(actual){
+        this._throwAnErrorIfIsNotString(actual);
+        this.isNegated = false;
+        this.actual = actual;
+    }
+    get not() {
+        this.isNegated = true;
+        return this;
+    }
+    include(expected) {
+        if (this.isNegated) this._throwAnErrorIfActualIncludes(expected);
+        else this._throwAnErrorIfActualDoesNotIncludes(expected);
+    }
+    _throwAnErrorIfIsNotString(value) {
+        const isNotValueAString = typeof value !== "string";
+        if (isNotValueAString) throw new (0, _expectedIsNotAStringErrorJs.ExpectedIsNotAStringError)(value);
+    }
+    _throwAnErrorIfActualIncludes(expected) {
+        if (this._isActualIncluding(expected)) throw new (0, _expectedIsIncludedInActualStringErrorJs.ExpectedIsIncludedInActualStringError)(this.actual, expected);
+    }
+    _throwAnErrorIfActualDoesNotIncludes(expected) {
+        if (this._isNotActualIncluding(expected)) throw new (0, _expectedIsNotIncludedInActualStringErrorJs.ExpectedIsNotIncludedInActualStringError)(this.actual, expected);
+    }
+    _isActualIncluding(expected) {
+        return this.actual.includes(expected);
+    }
+    _isNotActualIncluding(expected) {
+        return !this.actual.includes(expected);
+    }
+};
+
+},{"./errors/ExpectedIsIncludedInActualStringError.js":"76Z9g","./errors/ExpectedIsNotAStringError.js":"hfH1H","./errors/ExpectedIsNotIncludedInActualStringError.js":"2qoDF","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"76Z9g":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ExpectedIsIncludedInActualStringError", ()=>ExpectedIsIncludedInActualStringError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const ExpectedIsIncludedInActualStringError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(actual, expected){
+        super();
+        this.actual = actual;
+        this.expected = expected;
+    }
+    rawMessage() {
+        return `
+      Actual string: %actual%br
+      includes substring: %expected%br
+    `;
+    }
+    arguments() {
+        return {
+            actual: this.actual,
+            expected: this.expected
+        };
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hfH1H":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ExpectedIsNotAStringError", ()=>ExpectedIsNotAStringError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const ExpectedIsNotAStringError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(actual){
+        super();
+        this.actual = actual;
+    }
+    rawMessage() {
+        return `
+      %actual%br
+      is not a string, is a %actualType
+    `;
+    }
+    arguments() {
+        return {
+            actual: this.actual,
+            actualType: this._actualType()
+        };
+    }
+    _actualType() {
+        return typeof this.actual;
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2qoDF":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ExpectedIsNotIncludedInActualStringError", ()=>ExpectedIsNotIncludedInActualStringError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const ExpectedIsNotIncludedInActualStringError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(actual, expected){
+        super();
+        this.actual = actual;
+        this.expected = expected;
+    }
+    rawMessage() {
+        return `
+      Actual string: %actual%br
+      does not includes substring: %expected%br
+    `;
+    }
+    arguments() {
+        return {
+            actual: this.actual,
+            expected: this.expected
+        };
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bRL4c":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ExpectTruth", ()=>ExpectTruth);
+var _actualIsNotTruthyErrorJs = require("./errors/ActualIsNotTruthyError.js");
+var _actualIsTruthyErrorJs = require("./errors/ActualIsTruthyError.js");
+const ExpectTruth = class {
+    constructor(actual){
+        this.isNegated = false;
+        this.actual = actual;
+    }
+    get not() {
+        this.isNegated = true;
+        return this;
+    }
+    toBeTruthy() {
+        if (this.isNegated) this._throwAnErrorIfActualIsTruthy();
+        else this._throwAnErrorIfActualIsNotTruthy();
+    }
+    _throwAnErrorIfActualIsNotTruthy() {
+        if (!this.actual) throw new (0, _actualIsNotTruthyErrorJs.ActualIsNotTruthyError)(this.actual);
+    }
+    _throwAnErrorIfActualIsTruthy() {
+        if (this.actual) throw new (0, _actualIsTruthyErrorJs.ActualIsTruthyError)(this.actual);
+    }
+};
+
+},{"./errors/ActualIsNotTruthyError.js":"gK9ri","./errors/ActualIsTruthyError.js":"bWGBL","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gK9ri":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ActualIsNotTruthyError", ()=>ActualIsNotTruthyError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const ActualIsNotTruthyError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(actual){
+        super();
+        this.actual = actual;
+    }
+    rawMessage() {
+        return "Expect %actual to be truthy";
+    }
+    arguments() {
+        return {
+            actual: this.actual
+        };
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bWGBL":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ActualIsTruthyError", ()=>ActualIsTruthyError);
+var _expectationErrorJs = require("./ExpectationError.js");
+const ActualIsTruthyError = class extends (0, _expectationErrorJs.ExpectationError) {
+    constructor(actual){
+        super();
+        this.actual = actual;
+    }
+    rawMessage() {
+        return "Expect %actual not to be truthy";
+    }
+    arguments() {
+        return {
+            actual: this.actual
+        };
+    }
+};
+
+},{"./ExpectationError.js":"esgIY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["gqZud"], "gqZud", "parcelRequire682f")
+
+//# sourceMappingURL=index.1dbd7995.js.map
+</script>
+    <!--
+        Incluye tus ficheros de tests así:
+        <script src="MiFicheroConTestSpec.js"></script>
+    -->
+</body>
+</html>
+<script src="Tests.js"></script>
